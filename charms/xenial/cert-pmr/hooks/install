@@ -7,7 +7,7 @@ add-apt-repository multiverse
 set -e
 apt-get update
 
-apt-get install -y python git lxc pastebinit apt-cacher-ng
+apt-get install -y python python-launchpadlib git lxc pastebinit apt-cacher-ng
 
 # Create and set up my user and directories
 if  ! id ${TUSER} ; then
