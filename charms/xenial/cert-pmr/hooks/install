@@ -1,0 +1,31 @@
+#!/bin/bash
+TUSER=ubuntu
+TUSERHOME=/home/${TUSER}
+
+# Install needed packages
+add-apt-repository multiverse
+set -e
+apt-get update
+
+apt-get install -y git lxc pastebinit apt-cacher-ng
+
+# Create and set up my user and directories
+if  ! id ${TUSER} ; then
+    useradd -m -d ${TUSERHOME} ${TUSER}
+fi
+
+mkdir -p ${TUSERHOME}/.config
+
+# Get pmr and my configuration to deploy
+#juju-log "Getting pmr configs from github"
+#[ -e ${TUSERHOME}/.config/pmr ] && rm -rf ${TUSERHOME}/.config/pmr || true
+#git clone git://github.com/checkbox/pmr-configs.git ${TUSERHOME}/.config/pmr
+
+juju-log "Getting pmr from launchpad"
+[ -e ${TUSERHOME}/pmr ] && rm -rf ${TUSERHOME}/pmr || true
+git clone https://git.launchpad.net/pmr ${TUSERHOME}/pmr
+
+juju-log "Installing systemd unit file for pmr-lander"
+cp ${TUSERHOME}/.config/pmr/pmr-lander.service /usr/lib/systemd/system/
+
+

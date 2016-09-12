@@ -1,0 +1,12 @@
+[Unit]
+Description=PMR instance (tarmac lander for git branches)
+
+[Service]
+ExecStart=/home/ubuntu/pmr/process-merge-requests
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+RestartSec=60s
+
+[Install]
+WantedBy=multi-user.target

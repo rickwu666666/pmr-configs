@@ -1,0 +1,12 @@
+name: cert-pmr
+summary: Installs certification team pmr.
+maintainer: Sylvain Pineau <sylvain.pineau@canonical.com>
+description: |
+  Certification team pmr with per-commit testing using lxc.
+  See https://github.com/checkbox/pmr-configs
+categories:
+  - misc
+subordinate: false
+provides:
+  cert-pmr-lander: 
+      interface: landing-strip 

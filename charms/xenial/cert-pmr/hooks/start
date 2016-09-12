@@ -1,0 +1,2 @@
+systemctl enable pmr-lander.service
+systemctl start pmr-lander.service
