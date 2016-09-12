@@ -27,6 +27,6 @@ juju-log "Getting pmr from launchpad"
 git clone https://git.launchpad.net/pmr ${TUSERHOME}/pmr
 
 juju-log "Installing systemd unit file for pmr-lander"
-cp ${TUSERHOME}/.config/pmr/pmr-lander.service /usr/lib/systemd/system/
+cp ${TUSERHOME}/.config/pmr/pmr-lander.service /lib/systemd/system/
 
 
