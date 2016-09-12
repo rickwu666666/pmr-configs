@@ -26,6 +26,9 @@ juju-log "Getting pmr from launchpad"
 [ -e ${TUSERHOME}/pmr ] && rm -rf ${TUSERHOME}/pmr || true
 git clone https://git.launchpad.net/pmr ${TUSERHOME}/pmr
 
+juju-log "Patch pmr to load credentials"
+git -C ${TUSERHOME}/pmr am < $CHARM_DIR/load_credentials.patch
+
 juju-log "Installing systemd unit file for pmr-lander"
 cp ${TUSERHOME}/.config/pmr/pmr-lander.service /lib/systemd/system/
 
