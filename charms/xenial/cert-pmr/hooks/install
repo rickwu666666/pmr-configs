@@ -18,6 +18,10 @@ fi
 mkdir -p ${TUSERHOME}/.config
 chown ${TUSER}:${TUSER} ${TUSERHOME}/.config
 
+# Set up git global config to properly format commit msg
+git config --global user.name 'PMR'
+git config --global user.email '<pmr@pmr-lander>'
+
 # Get pmr and my configuration to deploy
 juju-log "Getting pmr configs from github"
 [ -e ${TUSERHOME}/.config/pmr ] && rm -rf ${TUSERHOME}/.config/pmr || true
