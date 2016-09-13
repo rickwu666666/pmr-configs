@@ -33,6 +33,7 @@ cat << EOF > /lib/systemd/system/pmr-lander.service
 Description=PMR instance (tarmac lander for git branches)
 
 [Service]
+User=${TUSER}
 ExecStart=${TUSERHOME}/pmr/process-merge-requests --user=${LAUNCHPAD_ID} \
           --conf_file=${TUSERHOME}/.config/pmr/pmr.conf \
           --credentials=${TUSERHOME}/.config/pmr/credentials
