@@ -27,6 +27,14 @@ juju-log "Getting pmr configs from github"
 [ -e ${TUSERHOME}/.config/pmr ] && rm -rf ${TUSERHOME}/.config/pmr || true
 git clone git://github.com/checkbox/pmr-configs.git ${TUSERHOME}/.config/pmr
 
+
+cat << EOF > ${TUSERHOME}/.config/pmr/refresh_config.sh
+#!/bin/bash
+
+git -C ${TUSERHOME}/.config/pmr pull
+EOF
+chmod +x ${TUSERHOME}/.config/pmr/refresh_config.sh
+
 juju-log "Getting pmr from github"
 [ -e ${TUSERHOME}/pmr ] && rm -rf ${TUSERHOME}/pmr || true
 git clone git://github.com/checkbox/pmr.git ${TUSERHOME}/pmr
@@ -40,6 +48,7 @@ Description=PMR instance (tarmac lander for git branches)
 User=${TUSER}
 ExecStart=${TUSERHOME}/pmr/process-merge-requests --user=${LAUNCHPAD_ID} \
           --conf_file=${TUSERHOME}/.config/pmr/pmr.conf \
+          --pre_exec=${TUSERHOME}/.config/pmr/refresh_config.sh \
           --credentials=${TUSERHOME}/.config/pmr/credentials
 ExecReload=/bin/kill -HUP \$MAINPID
 KillMode=process
